@@ -1,7 +1,7 @@
 import { Canvas } from '@react-three/fiber';
 import { Suspense, useEffect, useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { SimpleScene3D } from '../components/3d/SimpleScene3D';
+import { Scene3D } from '../components/3d/Scene3D';
 import { LoadingScreen } from '../components/LoadingScreen';
 import { Navigation } from '../components/Navigation';
 import { ChatBot } from '../components/ChatBot';
@@ -239,7 +239,7 @@ const Index = () => {
                   performance={{ min: isMobile ? 0.7 : 0.5 }} // Adjust performance threshold
                 >
                   <Suspense fallback={null}>
-                    <SimpleScene3D />
+                    <Scene3D />
                   </Suspense>
                 </Canvas>
               </motion.div>
