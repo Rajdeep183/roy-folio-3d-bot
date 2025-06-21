@@ -17,7 +17,7 @@ const Index = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsMainContentVisible(true);
-    }, 2000);
+    }, 5000);
   }, []);
 
   const animationVariants = {
