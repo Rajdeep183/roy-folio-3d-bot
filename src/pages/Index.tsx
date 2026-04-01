@@ -1,6 +1,5 @@
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useMemo, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { LoadingScreen } from '../components/LoadingScreen';
 import { ThemeProvider } from '../contexts/ThemeContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
@@ -9,10 +8,28 @@ import { Navigation } from '../components/Navigation';
 import { AboutSection } from '../components/sections/AboutSection';
 import { ProjectsSection } from '../components/sections/ProjectsSection';
 import { ContactSection } from '../components/sections/ContactSection';
-import { ChatBot } from '../components/ChatBot';
+import { GripVertical, SlidersHorizontal } from 'lucide-react';
+
+type SectionKey = 'about' | 'projects' | 'contact';
 
 const Index = () => {
-  const [isMainContentVisible, setIsMainContentVisible] = useState(false);
+  const [sectionOrder, setSectionOrder] = useState<SectionKey[]>(['about', 'projects', 'contact']);
+  const [visibleSections, setVisibleSections] = useState<Record<SectionKey, boolean>>({
+    about: true,
+    projects: true,
+    contact: true,
+  });
+  const [draggingSection, setDraggingSection] = useState<SectionKey | null>(null);
+  const [showEditor, setShowEditor] = useState(false);
+
+  const sectionComponents = useMemo(
+    () => ({
+      about: <AboutSection key="about" />,
+      projects: <ProjectsSection key="projects" />,
+      contact: <ContactSection key="contact" />,
+    }),
+    []
+  );
 
   useEffect(() => {
     const timer = setTimeout(() => setIsMainContentVisible(true), 1500);
