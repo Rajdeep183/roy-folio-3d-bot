@@ -2,7 +2,7 @@ import { Suspense, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { LoadingScreen } from '../components/LoadingScreen';
 import { ThemeProvider } from '../contexts/ThemeContext';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { SimpleScene3D } from '../components/3d/SimpleScene3D';
 import { Navigation } from '../components/Navigation';
@@ -15,21 +15,9 @@ const Index = () => {
   const [isMainContentVisible, setIsMainContentVisible] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsMainContentVisible(true);
-    }, 5000);
+    const timer = setTimeout(() => setIsMainContentVisible(true), 1500);
+    return () => clearTimeout(timer);
   }, []);
-
-  const animationVariants = {
-    container: {
-      initial: { opacity: 0, scale: 0.95 },
-      animate: { opacity: 1, scale: 1, transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } },
-    },
-    background: {
-      initial: { opacity: 0 },
-      animate: { opacity: 1, transition: { duration: 1.5, ease: "easeOut" } },
-    },
-  };
 
   return (
     <ThemeProvider>
@@ -42,50 +30,45 @@ const Index = () => {
           <LoadingScreen key="loading" />
         ) : (
           <motion.div
-            variants={animationVariants.container}
-            initial="initial"
-            animate="animate"
-            className="min-h-screen bg-gradient-to-br from-background via-purple-900/20 to-background relative overflow-hidden"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="min-h-screen bg-background relative overflow-hidden"
           >
             <Navigation />
-            <section id="home" className="relative min-h-screen">
-              <motion.div
-                variants={animationVariants.background}
-                className="absolute inset-0 z-0"
-              >
+            <section id="home" className="relative min-h-screen border-b border-border/60">
+              <div className="absolute inset-0 z-0 opacity-30 dark:opacity-40">
                 <Canvas
                   camera={{ position: [0, 0, 10], fov: 75 }}
-                  gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+                  gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
                   dpr={[1, 2]}
                 >
                   <Suspense fallback={null}>
                     <SimpleScene3D />
                   </Suspense>
                 </Canvas>
-              </motion.div>
-              <motion.div
-                className="relative z-20 flex items-center justify-center min-h-screen"
-              >
-                <div className="text-center text-foreground px-6">
-                  <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-6">
-                    Rajdeep Roy
-                  </h1>
-                  <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                    ML Engineer & Software Developer
+              </div>
+
+              <div className="relative z-20 flex items-center justify-center min-h-screen px-6">
+                <div className="text-center text-foreground max-w-3xl">
+                  <p className="mb-4 text-sm uppercase tracking-[0.2em] text-muted-foreground">Portfolio</p>
+                  <h1 className="text-5xl md:text-7xl font-semibold tracking-tight mb-6">Rajdeep Roy</h1>
+                  <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
+                    Machine learning engineer and software developer focused on practical, reliable products.
                   </p>
-                  <div className="flex gap-4 justify-center">
-                    <a href="https://www.linkedin.com/in/rajdeep-roy-4086a2274/" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-colors">
+                  <div className="flex gap-3 justify-center flex-wrap">
+                    <a href="https://www.linkedin.com/in/rajdeep-roy-4086a2274/" target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 bg-primary text-primary-foreground rounded-full text-sm font-medium hover:opacity-90">
                       LinkedIn
                     </a>
-                    <a href="https://github.com/Rajdeep183" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-lg font-semibold transition-colors">
+                    <a href="https://github.com/Rajdeep183" target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 border border-border bg-card text-card-foreground rounded-full text-sm font-medium hover:bg-accent">
                       GitHub
                     </a>
-                    <a href="https://docs.google.com/document/d/1XUs4nQxRFyKGnd96vhWwu5U9xHkN3WhGlM8BjMkGsMQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold transition-colors">
+                    <a href="https://docs.google.com/document/d/1XUs4nQxRFyKGnd96vhWwu5U9xHkN3WhGlM8BjMkGsMQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 border border-border bg-card text-card-foreground rounded-full text-sm font-medium hover:bg-accent">
                       Resume
                     </a>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </section>
             <AboutSection />
             <ProjectsSection />
