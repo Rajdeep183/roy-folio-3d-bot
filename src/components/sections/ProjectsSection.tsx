@@ -139,7 +139,7 @@ export const ProjectsSection = () => {
   return (
     <section
       id="projects"
-      className="relative min-h-screen py-20 px-6 bg-gradient-to-b from-card/10 to-transparent cursor-default"
+      className="relative py-24 px-6 border-b border-border/60"
     >
       <div className="max-w-6xl mx-auto">
         <motion.div
@@ -149,10 +149,10 @@ export const ProjectsSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-bold text-foreground mb-6 cursor-text">
+          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground mb-5">
             Projects & Experience
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto cursor-text">
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Explore my machine learning projects, professional experience, and certifications in AI and data science.
           </p>
         </motion.div>
@@ -165,7 +165,7 @@ export const ProjectsSection = () => {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <h3 className="text-3xl font-bold text-foreground mb-8 text-center cursor-text">Featured Projects</h3>
+          <h3 className="text-2xl md:text-3xl font-semibold text-foreground mb-8 text-center">Featured Projects</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project, index) => (
               <motion.div
@@ -175,12 +175,11 @@ export const ProjectsSection = () => {
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.02 }}
-                className="cursor-pointer"
               >
-                <Card className="bg-card/50 backdrop-blur-sm border-border hover:bg-card/70 transition-all h-full">
+                <Card className="bg-card border-border h-full shadow-sm">
                   <CardHeader>
-                    <CardTitle className="text-xl text-cyan-400 cursor-text">{project.name}</CardTitle>
-                   <CardDescription className="text-muted-foreground cursor-text break-words">
+                    <CardTitle className="text-xl text-foreground">{project.name}</CardTitle>
+                   <CardDescription className="text-muted-foreground break-words">
                   {project.description || "No description available"}
                   </CardDescription>
                   </CardHeader>
@@ -190,13 +189,13 @@ export const ProjectsSection = () => {
                         {project.topics?.slice(0, 3).map((topic) => (
                           <span
                             key={topic}
-                            className="px-2 py-1 bg-purple-600/60 text-purple-100 rounded-full text-sm cursor-default"
+                            className="px-2 py-1 bg-secondary text-secondary-foreground rounded-full text-xs"
                           >
                             {topic}
                           </span>
                         ))}
                         {project.language && (
-                          <span className="px-2 py-1 bg-blue-600/60 text-blue-100 rounded-full text-sm cursor-default">
+                          <span className="px-2 py-1 bg-secondary text-secondary-foreground rounded-full text-xs">
                             {project.language}
                           </span>
                         )}
@@ -238,7 +237,7 @@ export const ProjectsSection = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h3 className="text-3xl font-bold text-foreground mb-8 text-center cursor-text">Professional Experience</h3>
+          <h3 className="text-2xl md:text-3xl font-semibold text-foreground mb-8 text-center">Professional Experience</h3>
           <div className="grid md:grid-cols-2 gap-6">
             {experiences.map((exp, index) => (
               <motion.div
@@ -248,31 +247,30 @@ export const ProjectsSection = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.02 }}
-                className="cursor-pointer"
               >
-                <Card className="bg-card/50 backdrop-blur-sm border-border hover:bg-card/70 transition-all h-full">
+                <Card className="bg-card border-border h-full shadow-sm">
                   <CardHeader>
                     <div className="flex items-center gap-3">
-                      <exp.icon className="w-8 h-8 text-cyan-400" />
+                      <exp.icon className="w-7 h-7 text-foreground" />
                       <div>
-                        <CardTitle className="text-lg text-foreground cursor-text">{exp.title}</CardTitle>
-                        <CardDescription className="text-sm text-cyan-400 cursor-text">{exp.organization}</CardDescription>
+                        <CardTitle className="text-lg text-foreground">{exp.title}</CardTitle>
+                        <CardDescription className="text-sm text-muted-foreground">{exp.organization}</CardDescription>
                       </div>
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-muted-foreground mb-4 cursor-text">{exp.description}</p>
+                    <p className="text-muted-foreground mb-4">{exp.description}</p>
                     <div className="flex flex-wrap gap-2 mb-3">
                       {exp.skills.map((skill) => (
                         <span
                           key={skill}
-                          className="px-2 py-1 bg-green-600/40 text-green-200 rounded-full text-xs cursor-default"
+                          className="px-2 py-1 bg-secondary text-secondary-foreground rounded-full text-xs"
                         >
                           {skill}
                         </span>
                       ))}
                     </div>
-                    <p className="text-sm text-muted-foreground font-medium cursor-text">{exp.date}</p>
+                    <p className="text-sm text-muted-foreground font-medium">{exp.date}</p>
                   </CardContent>
                 </Card>
               </motion.div>
