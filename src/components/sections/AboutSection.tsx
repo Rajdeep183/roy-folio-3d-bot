@@ -5,79 +5,76 @@ export const AboutSection = () => {
   const skills = [
     {
       icon: Code,
-      name: "Full-Stack Development",
-      description: "React, TypeScript, Node.js, Streamlit, HTML/CSS",
+      name: 'Full-Stack Development',
+      description: 'React, TypeScript, Node.js, Streamlit, HTML/CSS',
     },
     {
       icon: Database,
-      name: "Data Engineering",
-      description: "SQL, Dataiku, Web Scraping, MySQL, PostgreSQL",
+      name: 'Data Engineering',
+      description: 'SQL, Dataiku, Web Scraping, MySQL, PostgreSQL',
     },
     {
       icon: Globe,
-      name: "Cloud & Tools",
-      description: "AWS (EC2/S3), GitHub, Jupyter Notebook",
+      name: 'Cloud & Tools',
+      description: 'AWS (EC2/S3), GitHub, Jupyter Notebook',
     },
     {
       icon: Zap,
-      name: "Machine Learning",
-      description: "scikit-learn, pandas, NumPy, Model Optimization",
+      name: 'Machine Learning',
+      description: 'scikit-learn, pandas, NumPy, Model Optimization',
     },
   ];
 
   return (
-    <section id="about" className="relative min-h-screen py-20 px-6 bg-gradient-to-b from-transparent to-card/10">
+    <section id="about" className="relative py-24 px-6 border-b border-border/60">
       <div className="max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
-          <h2 className="text-5xl font-bold text-foreground mb-6">About Rajdeep Roy</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            I'm Rajdeep Roy, a passionate Computer Science undergrad at VIT Vellore and a full-stack developer with a strong foundation in data science and cloud computing. 
-            I enjoy building intelligent systems and intuitive web applications that solve real-world problems.
+          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground mb-5">About</h2>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            I'm Rajdeep Roy, a Computer Science undergraduate at VIT Vellore building production-focused software and machine learning systems.
+            I enjoy combining clean interfaces with practical data-driven solutions.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
           {skills.map((skill, index) => (
             <motion.article
               key={skill.name}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
               viewport={{ once: true }}
-              className="bg-card/50 backdrop-blur-sm rounded-lg p-6 border border-border hover:bg-card/70 transition-all"
+              className="rounded-2xl p-6 border border-border bg-card"
             >
-              <skill.icon className="w-12 h-12 text-cyan-400 mb-4" aria-hidden="true" />
-              <h3 className="text-xl font-semibold text-foreground mb-2">{skill.name}</h3>
-              <p className="text-muted-foreground">{skill.description}</p>
+              <skill.icon className="w-6 h-6 text-foreground mb-4" aria-hidden="true" />
+              <h3 className="text-lg font-medium text-foreground mb-2">{skill.name}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{skill.description}</p>
             </motion.article>
           ))}
         </div>
 
         <motion.article
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="bg-card/50 backdrop-blur-sm rounded-lg p-8 border border-border"
+          className="rounded-2xl p-8 border border-border bg-card"
         >
-          <h3 className="text-2xl font-semibold text-foreground mb-4">Rajdeep Roy's Professional Journey</h3>
-          <div className="text-muted-foreground leading-relaxed">
+          <h3 className="text-2xl font-medium text-foreground mb-4">Professional Journey</h3>
+          <div className="text-muted-foreground leading-relaxed space-y-4">
             <p>
-              My journey began with curiosity for how systems work and grew into a drive for creating impactful solutions. 
-              At SOL Analytics, I built scalable data pipelines and optimized reporting for over a million records. 
-            </p>
-            <p className="my-4">
-              As Project & Events Head at IETE ISF, I led multiple tech events, collaborated with professionals, and empowered students.
-              I'm always looking to learn and grow — currently diving deeper into data science, system security, and embedded systems.
+              My journey began with curiosity for how systems work and evolved into shipping solutions that improve real workflows.
+              At SOL Analytics, I contributed to scalable data pipelines and reporting for large datasets.
             </p>
             <p>
-              Check out my <a href="https://github.com/Rajdeep183" className="text-cyan-400 underline" target="_blank" rel="noopener" aria-label="Rajdeep Roy's GitHub profile">GitHub</a> and <a href="https://linkedin.com/in/rajdeep-roy-4086a2274" className="text-cyan-400 underline" target="_blank" rel="noopener" aria-label="Rajdeep Roy's LinkedIn profile">LinkedIn</a> to see more of what I've been working on.
+              As Project & Events Head at IETE ISF, I led technical events and student initiatives. I’m currently exploring deeper work in machine learning,
+              systems, and security-focused engineering.
             </p>
           </div>
         </motion.article>
