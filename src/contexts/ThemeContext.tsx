@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 interface ThemeContextType {
@@ -16,18 +15,39 @@ export const useTheme = () => {
   return context;
 };
 
+const readStoredTheme = () => {
+  if (typeof window === 'undefined') return null;
+
+  try {
+    return window.localStorage.getItem('theme');
+  } catch {
+    return null;
+  }
+};
+
+const writeStoredTheme = (theme: 'dark' | 'light') => {
+  if (typeof window === 'undefined') return;
+
+  try {
+    window.localStorage.setItem('theme', theme);
+  } catch {
+    // ignore storage failures (private mode / blocked storage)
+  }
+};
+
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
+    const savedTheme = readStoredTheme();
+    if (savedTheme === 'light' || savedTheme === 'dark') {
       setIsDark(savedTheme === 'dark');
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    writeStoredTheme(isDark ? 'dark' : 'light');
+
     if (isDark) {
       document.documentElement.classList.add('dark');
     } else {
@@ -36,12 +56,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, [isDark]);
 
   const toggleTheme = () => {
-    setIsDark(!isDark);
+    setIsDark((prev) => !prev);
   };
 
-  return (
-    <ThemeContext.Provider value={{ isDark, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={{ isDark, toggleTheme }}>{children}</ThemeContext.Provider>;
 };
